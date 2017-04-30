@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta charset="utf-8">
 <title>{{APP_NAME}}-{{title}}</title>
-<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7-dist/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7-dist/css/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css" href="/public/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/public/bootstrap/bootstrap-3.3.7-dist/css/bootstrap-theme.css">
 
 </head>
 </head>
