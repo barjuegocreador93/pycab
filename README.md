@@ -12,7 +12,7 @@ to run the server:
 
 $python main.py
 
-to crate a files and dacabase migrations and models:
+to crate a files and database migrations and models:
 
 $python pycab.py
 
