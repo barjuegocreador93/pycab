@@ -31,6 +31,10 @@ def pub (filename,dirname,framework):
 	
 APP.route ('/public/:framework/:dirname/:filename')(pub)
 
+def pub (filename,dirname,framework,required):
+	return static_file (filename, root=settings.ROOT+"/public/"+required+"/"+framework+"/"+dirname)
+	
+APP.route ('/public/:required/:framework/:dirname/:filename')(pub)
 
 
 
