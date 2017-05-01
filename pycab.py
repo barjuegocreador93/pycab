@@ -1,5 +1,6 @@
 from settings import ROOT
 
+version='0.1.0'
 
 
 def migrations():
@@ -43,31 +44,30 @@ def help ():
 	print ("migrate => to generate a table in database through a model migration")
 	print ("make view => to crate a view ")
 	print ("make controller => to crate a controller ")
-	
+
+
+
+
+
+
+
+
 
 while True:
-    arg=raw_input ('$ ')
-    arg=arg.replace (" ","")
-    if arg == 'migrate':
-    	migrations ()
-    	
-    elif arg == 'makemigration':
-    	make_migration()
-    	
-    elif arg == 'makemodel':
-    	make_models()
-    	
-    elif arg == 'help':
-    	help()
-    	
-    elif arg == 'makeview':
-    	make_view()
-    	
-    elif arg == 'makecontroller':
-    	make_controller()
-    	
-    elif arg == 'runserver':
-    	import main
-    	
-    else: print (arg+" it's not found")
-    	
+	m=raw_input ('$ ')
+	arg=m.split(" ")
+
+	if len(arg)==1:
+		print(arg[0])
+		if str(arg[0]) =='migrate':
+			migrations()
+	if len(arg)==2:
+
+		if arg[0]=='make':
+			if str(arg[1])=='migration': make_migration()
+			elif str(arg[1])=='model': make_models()
+			elif str(arg[1])=='view': make_view()
+			elif str(arg[1])=='controller': make_controller()
+		elif arg[0] =='run':
+			if str(arg[1])== 'server':import main
+			elif str(arg[1])=='requires': import pycabRequires

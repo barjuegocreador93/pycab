@@ -1,6 +1,15 @@
+'''
+@autor Camilo Barbosa 
+
+@ref github barjuegocreador93
+
+'''
+
 from resources.packages import pathexist
 import os
 import fileDownloader as fileDownloader
+
+
 
 import zipfile
 

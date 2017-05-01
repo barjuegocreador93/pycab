@@ -1,4 +1,11 @@
-from bottle import template 
+'''
+@autor Camilo Barbosa 
+
+@ref github barjuegocreador93
+
+'''
+
+from bottle import template
 from settings import ROOT,APP_NAME 
 
 def viewroot(name):

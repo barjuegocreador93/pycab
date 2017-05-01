@@ -1,3 +1,10 @@
+'''
+@autor Camilo Barbosa 
+
+@ref github barjuegocreador93
+
+'''
+
 import sqlite3
 import settings
 

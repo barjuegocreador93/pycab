@@ -1,3 +1,10 @@
+'''
+@autor Camilo Barbosa 
+
+@ref github barjuegocreador93
+
+'''
+
 import os,sys,os.path
 import pip
 
