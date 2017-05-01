@@ -1,5 +1,7 @@
 import sqlite3
-import settings 
+import settings
+
+version='0.1.0'
 
 DB_ROOT=settings.DB_NAME
 
