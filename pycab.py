@@ -10,7 +10,7 @@ def migrations():
 def make_migration():
 	model=raw_input ('through model name: ')
 	
-	make='''from models.'''+model.capitalize()+' import '+model.capitalize()+'''\ntable='''+model.capitalize()+'''()\n'''+model.capitalize()+'''.Migrations(\nid='''+model.capitalize()+'''.MigInteger('''+model.capitalize()+'''.MigPrimaryKey())\n)\n'''
+	make='''from models.'''+model.capitalize()+' import '+model.capitalize()+'''\ntable='''+model.capitalize()+'''().TableSchema()\n'''+model.capitalize()+'''.Migrations(\nid=table.Integer().PrimaryKey().Column\n)\n'''
 	a=open (ROOT +"/database/create_table_"+model+".py",'w')
 	a.write(make)
 	a.close()
@@ -39,11 +39,12 @@ def make_controller ():
 
 def help ():
 	print ("---pycab---")
-	print ("make model => to crate a model")
-	print ("make migration => to crate a migration of model")
-	print ("migrate => to generate a table in database through a model migration")
-	print ("make view => to crate a view ")
-	print ("make controller => to crate a controller ")
+	print ("make model => to crate a model.")
+	print ("make migration => to crate a migration of model.")
+	print ("migrate => to generate a table in database through a model migration.")
+	print ("make view => to crate a view. ")
+	print ("make controller => to crate a controller. ")
+	print ("exit => exit")
 
 
 
@@ -56,12 +57,19 @@ def help ():
 while True:
 	m=raw_input ('$ ')
 	arg=m.split(" ")
-
+	error=False
 	if len(arg)==1:
-		print(arg[0])
+
 		if str(arg[0]) =='migrate':
 			migrations()
-	if len(arg)==2:
+		elif arg[0] == 'help':
+			help()
+		elif arg[0] == 'exit':
+			break
+		elif arg[0] == 'install':
+			import install
+		else : error=True
+	elif len(arg)==2:
 
 		if arg[0]=='make':
 			if str(arg[1])=='migration': make_migration()
@@ -71,3 +79,8 @@ while True:
 		elif arg[0] =='run':
 			if str(arg[1])== 'server':import main
 			elif str(arg[1])=='requires': import pycabRequires
+			else:error=True
+
+	else: error=True
+
+	if error: print('Command no exit please try to see the command help')

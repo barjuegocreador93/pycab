@@ -1,8 +1,8 @@
 from models.User import User
-table=User()
+table=User().TableSchema()
 User.Migrations(
-    id=User.MigInteger(User.MigPrimaryKey()),
-    name=User.MigString(255,User.MigNotEmpty()),
-    email=User.MigString(255,User.MigNotEmpty(),User.MigUnique()),
-    password=User.MigString(255,User.MigNotEmpty())
+    id=table.Integer().PrimaryKey().Column,
+    name=table.String(255).NotEmpty().Column,
+    email=table.String(255).NotEmpty().Unique().Column,
+    password=table.String(255).NotEmpty().Column
 )

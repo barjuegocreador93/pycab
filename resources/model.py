@@ -8,7 +8,7 @@
 import sqlite3
 import settings
 
-version='0.1.0'
+version='0.1.1'
 
 DB_ROOT=settings.DB_NAME
 
@@ -72,6 +72,34 @@ def qrys(*props,**vars):
 
 	
 	return result
+
+class Table():
+	Column=''
+
+	@classmethod
+	def String(cls,quat):
+		cls.Column='varchar(' + str(quat) + ') '
+		return cls
+
+	@classmethod
+	def NotEmpty(cls):
+		cls.Column+='NOT NULL '
+		return cls
+
+	@classmethod
+	def Integer(cls):
+		cls.Column='int '
+		return cls
+
+	@classmethod
+	def PrimaryKey(cls):
+		cls.Column+='primary key '
+		return cls
+
+	@classmethod
+	def Unique(cls):
+		cls.Column+= 'unique '
+		return cls
 	
 	
 class Model():
@@ -91,24 +119,8 @@ class Model():
 		print(data['init'])
 
 	@staticmethod
-	def MigString(quat,*args):
-		return 'varchar('+str(quat)+') '+''.join(args)
-
-	@staticmethod
-	def MigNotEmpty():
-		return 'NOT NULL '
-
-	@staticmethod
-	def MigInteger(*args):
-		return 'int '.join(args)
-
-	@staticmethod
-	def MigPrimaryKey():
-		return 'primary key '
-
-	@staticmethod
-	def MigUnique():
-		return 'unique '
+	def TableSchema():
+		return Table()
 
 
 	@classmethod
@@ -129,5 +141,12 @@ class Model():
 		data=qrys('vars-sql',dd,**qry)
 		c.execute('SELECT '+'*'+' FROM '+cls.tablename+' WHERE '+data['e-and'])
 		return c.fetchall()
+
+
+	@classmethod
+
+	def Update(cls,columnSearch,**columnsSet):
+		db=sqlite3.connect(DB_ROOT)
+		db
 
 
