@@ -31,7 +31,7 @@ or
 
     $python pycab.py
 
-    $ runserver
+    $ run server
 
 # settings.py
 
