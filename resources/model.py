@@ -11,13 +11,13 @@ def qrys(*props,**vars):
 			result ['vars']='('
 			
 			for key,value in vars.iteritems():
-				result ['vars']+=key + ','
-				
+				result ['vars']+=key + ', '
+
+			result['vars'] = result['vars'][:len(result['vars']) - 2]
 			result['vars']+=')'
 			
 		elif i == 'init-sql':
 		 	result ['init']='('
-		 	
 		 	for key,value in vars.iteritems():
 		 		result ['init']+=key+' '+value + ' , '
 		 	result['init']=result['init'][:len (result['init'])-2]
@@ -33,39 +33,92 @@ def qrys(*props,**vars):
 		 
 		elif i == 'e-and-sql':
 			result ['e-and']+='('
-			
 			for key,value in vars.iteritems():
 		 		result['e-and']+=key+' = '+value + ' & '
 		 	result['e-and']=result['e-and'][:len (result['e-and'])-2]	
 		 	result['e-and']+=')'
+
+		elif isinstance(i,dict):
+			if 'columns-values-sql' in i.keys():
+				result['values'] = '('
+				for key, value in vars.iteritems():
+					if not isinstance(i['columns-values-sql'][key],str):
+						result['values'] +=str(value) + ' , '
+					else:
+						result['values'] +="'" + value + "' , "
+
+				result['values'] = result['values'][:len(result['values']) - 2]
+				result['values'] += ')'
+
+			elif 'columns-e-and-sql' in i.keys():
+				result['e-and'] = '('
+				for key, value in vars.iteritems():
+					if not isinstance(i['columns-e-and-sql'][key], str):
+						result['e-and'] += key + ' = ' + str(value) + ' & '
+					else:
+						result['e-and'] += key + " = '" + value + "' & "
+
+				result['e-and'] = result['e-and'][:len(result['e-and']) - 2]
+				result['e-and'] += ')'
+
 	
 	return result
 	
 	
 class Model():
 
-	def Migrations(self,**columns):
+	Columns={}
+	Columns['id']=int()
+	tablename=''
+
+	@classmethod
+	def Migrations(cls,**columns):
 		table=sqlite3.connect(DB_ROOT)
-		self.tablename=self.__class__.__name__
+		cls.tablename= cls.__name__
 		data=qrys('init-sql',**columns)
-		print ('creating a table '+self.tablename)
-		print(data['init'])
-		table.execute('CREATE TABLE '+self.tablename+' '+data['init']+';')
+		table.execute('CREATE TABLE '+cls.tablename+' '+data['init']+';')
 		table.commit()
-				
-	def Create (self,**columns):
+		print ('creating a table ' + cls.tablename)
+		print(data['init'])
+
+	@staticmethod
+	def MigString(quat,*args):
+		return 'varchar('+str(quat)+') '+''.join(args)
+
+	@staticmethod
+	def MigNotEmpty():
+		return 'NOT NULL '
+
+	@staticmethod
+	def MigInteger(*args):
+		return 'int '.join(args)
+
+	@staticmethod
+	def MigPrimaryKey():
+		return 'primary key '
+
+	@staticmethod
+	def MigUnique():
+		return 'unique '
+
+
+	@classmethod
+	def Create (cls,**columns):
 		db=sqlite3.connect(DB_ROOT)
-		data=qrys('vars-sql','values-sql',**columns)
-		db.execute('INSERT INTO '+self.tablename+' '+data['vars']+' VALUES '+data ['values'])
+		dd={}
+		dd['columns-values-sql']=cls.Columns
+		data=qrys('vars-sql',dd,**columns)
+		db.execute('INSERT INTO '+cls.tablename+' '+data['vars']+' VALUES '+data ['values'])
 		db.commit()
-		
-	def Where(self,**qry):
-		db=sqlite3.connect(DB_NAME)
+
+	@classmethod
+	def Where(cls,**qry):
+		db=sqlite3.connect(DB_ROOT)
 		c=db.cursor()
-		data=qrys('vars-sql','e-and-sql',**qry)
-		c.execute('SELECT '+data['vars']+' FROM '+self.tablename+' WHERE '+data['e-and'])
-		return c.fletchall()
+		dd={}
+		dd['columns-e-and-sql'] = cls.Columns
+		data=qrys('vars-sql',dd,**qry)
+		c.execute('SELECT '+'*'+' FROM '+cls.tablename+' WHERE '+data['e-and'])
+		return c.fetchall()
 
 
-		 	
-		

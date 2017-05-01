@@ -9,7 +9,7 @@ def migrations():
 def make_migration():
 	model=raw_input ('through model name: ')
 	
-	make='''from models.'''+model.capitalize()+' import '+model.capitalize()+'''\ntable='''+model.capitalize()+'''()\ntable.Migrations(\nid="INTEGER PRIMARY KEY"\n)\n'''
+	make='''from models.'''+model.capitalize()+' import '+model.capitalize()+'''\ntable='''+model.capitalize()+'''()\n'''+model.capitalize()+'''.Migrations(\nid='''+model.capitalize()+'''.MigInteger('''+model.capitalize()+'''.MigPrimaryKey())\n)\n'''
 	a=open (ROOT +"/database/create_table_"+model+".py",'w')
 	a.write(make)
 	a.close()
@@ -17,7 +17,7 @@ def make_migration():
 def make_models():
 	model=raw_input ('new model name: ')
 	
-	make='''from resources.model import Model\nclass '''+model.capitalize()+'''(Model)\n\tpass'''
+	make='''from resources.model import Model\nclass '''+model.capitalize()+'''(Model):\n\tColumns=Model.Columns\n\tpass'''
 	a=open (ROOT +"/models/"+model.capitalize() +".py",'w')
 	a.write(make)
 	a.close()
