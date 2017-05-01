@@ -40,7 +40,7 @@ in this file you can find all of basical configurations of a project
     ROOT => Is the path of our project
 
     HOST_NAME is the site url name. 'localhost'
-
+   
     HOST_PORT is the site url port. 8000
 
     HOST_DEBUG is to know the problems of our site if it takes some else.
@@ -50,7 +50,7 @@ in this file you can find all of basical configurations of a project
 
 # routes.py
 
-# controlles
+# controllers
 
 # views
 
