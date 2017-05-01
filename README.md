@@ -19,7 +19,7 @@ Micro framework web App with python bottle
 
 
 
-#Usage
+# Usage
 
 Make a great web page with this framework in easy way
 
@@ -33,7 +33,7 @@ or
 
     $ runserver
 
-#settings.py
+# settings.py
 
 in this file you can find all of basical configurations of a project
 
@@ -48,15 +48,15 @@ in this file you can find all of basical configurations of a project
     DB_NAME is the name of sqlite3 database
 
 
-#routes.py
+# routes.py
 
-#ocntrolles
+# ocntrolles
 
-#views
+# views
 
-#models
+# models
 
-#migrationss
+# migrationss
 
 
 
