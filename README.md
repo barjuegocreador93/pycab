@@ -50,7 +50,7 @@ in this file you can find all of basical configurations of a project
 
 # routes.py
 
-# ocntrolles
+# controlles
 
 # views
 
