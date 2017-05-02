@@ -9,6 +9,8 @@ import os,sys,os.path
 import pip
 
 
+
+
 def pathexist(path):
 	return os.path.exists(path)
 	
@@ -22,4 +24,4 @@ def pipinstall(module):
 	modcmd('install',module)
 	return True
 
-	
+

@@ -1,6 +1,8 @@
 from settings import ROOT
-
+from resources.roots import MODEL_ROOT,CONTROLLER_ROOT,VIEW_ROOT,DATABASE_ROOT
 version='0.1.2'
+from main import run_server
+import pycabRequires
 
 
 def migrations():
@@ -11,7 +13,7 @@ def make_migration():
 	model=raw_input ('through model name: ')
 	
 	make='''from models.'''+model.capitalize()+' import '+model.capitalize()+'''\ntable='''+model.capitalize()+'''().TableSchema()\n'''+model.capitalize()+'''.Migrations(\nid=table.Integer().PrimaryKey().AutoIncrement().Column\n)\n'''
-	a=open (ROOT +"/database/create_table_"+model+".py",'w')
+	a=open (DATABASE_ROOT+"create_table_"+model+".py",'w')
 	a.write(make)
 	a.close()
 	
@@ -19,20 +21,20 @@ def make_models():
 	model=raw_input ('new model name: ')
 	
 	make='''from resources.model import Model\nclass '''+model.capitalize()+'''(Model):\n\tColumns=Model.Columns\n\tpass'''
-	a=open (ROOT +"/models/"+model.capitalize() +".py",'w')
+	a=open (MODEL_ROOT+model.capitalize() +".py",'w')
 	a.write(make)
 	a.close()
 	
 def make_view():
 	view=raw_input('new view name: ')
-	ar=open(ROOT +'/views/'+view+'.tpl','w')
+	ar=open(VIEW_ROOT+view+'.tpl','w')
 	ar.write ("<p>make something great!!</p>")
 	ar.close()
 	
 def make_controller ():
 	cont=raw_input('new controller name: ')
 	make='''from resources.view import view\nfrom bottle import request\nimport models\ndef main ():\n\treturn view("index",title="title")'''
-	ar=open (ROOT +'/controllers/'+cont+'.py','w')
+	ar=open (CONTROLLER_ROOT+cont+'.py','w')
 	ar.write(make)
 	ar.close()
 
@@ -76,9 +78,10 @@ while True:
 			elif str(arg[1])=='model': make_models()
 			elif str(arg[1])=='view': make_view()
 			elif str(arg[1])=='controller': make_controller()
+			else: error= True
 		elif arg[0] =='run':
-			if str(arg[1])== 'server':import main
-			elif str(arg[1])=='requires': import pycabRequires
+			if str(arg[1])== 'server': run_server()
+			elif str(arg[1])=='requires':  pycabRequires.requires()
 			else:error=True
 
 	else: error=True
