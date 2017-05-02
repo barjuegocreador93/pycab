@@ -6,3 +6,4 @@ class User(Model):
 	Columns['email']=str()
 	Columns['password']=str()
 	pass
+
