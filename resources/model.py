@@ -190,7 +190,6 @@ class Model():
 
 
 	@classmethod
-
 	def Update(cls,values=dict,**qry):
 		db=sqlite3.connect(DB_ROOT)
 		cls.tablename = cls.__name__

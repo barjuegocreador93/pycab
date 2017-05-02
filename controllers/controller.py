@@ -3,5 +3,5 @@ from bottle import response,request
 
 
 def home():
-	return view('home',title='Home')
+	return view('home',title='Home',mylist=['jquery','bootstrap'])
 
