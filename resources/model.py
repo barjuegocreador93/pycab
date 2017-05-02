@@ -17,7 +17,7 @@ def qrys(*props,**vars):
 	
 	for i in props:
 		if i == 'vars-sql':
-			result ['vars']='('
+			result ['vars']='( '
 			
 			for key,value in vars.iteritems():
 				result ['vars']+=key + ', '
@@ -154,6 +154,7 @@ class Model():
 	@classmethod
 	def Create (cls,**columns):
 		db=sqlite3.connect(DB_ROOT)
+		cls.tablename=cls.__name__
 		dd={}
 		dd['columns-values-sql']=cls.Columns
 		data=qrys('vars-sql',dd,**columns)
@@ -163,18 +164,36 @@ class Model():
 	@classmethod
 	def Where(cls,**qry):
 		db=sqlite3.connect(DB_ROOT)
+		cls.tablename = cls.__name__
 		c=db.cursor()
 		dd={}
 		dd['columns-e-and-sql'] = cls.Columns
-		data=qrys('vars-sql',dd,**qry)
-		c.execute('SELECT '+'*'+' FROM '+cls.tablename+' WHERE '+data['e-and'])
-		return c.fetchall()
+		data=qrys(dd,**qry)
+		qry=cls.Columns
+		data2=qrys('vars-sql',**qry)
+		print data2
+		print data
+		c.execute('SELECT '+data2['vars']+' FROM '+cls.tablename+' WHERE '+data['e-and'])
+		resultA= c.fetchall()
+		resultB=[]
+		n=cls.Columns
+
+		for i in resultA:
+			new={}
+			w=0
+			for k in n.keys():
+				new[k]=i[w]
+				w+=1
+			resultB.append(new)
+
+		return resultB
 
 
 	@classmethod
 
 	def Update(cls,values=dict,**qry):
 		db=sqlite3.connect(DB_ROOT)
+		cls.tablename = cls.__name__
 		dd={}
 		dd['columns-key-values-sql']=cls.Columns
 		mm={}
