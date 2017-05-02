@@ -1,4 +1,4 @@
-# pycab
+# pycab v.0.1.3 | no stable
 Micro framework web App with python bottle
 
 # install
@@ -15,7 +15,8 @@ Micro framework web App with python bottle
 
 3. run pycab-requires.py
 
-        $python pycab-requires.py
+        $python pycab.py
+        $ run requires
 
 
 
@@ -25,7 +26,7 @@ Make a great web page with this framework in easy way
 
 to run a localhost:
 
-    $python main.py
+    $python run_server.py
 
 or
 

@@ -1,6 +1,6 @@
 from settings import ROOT
 from resources.roots import MODEL_ROOT,CONTROLLER_ROOT,VIEW_ROOT,DATABASE_ROOT
-version='0.1.2'
+version='0.1.3'
 from main import run_server
 import pycabRequires
 
