@@ -10,7 +10,7 @@ def migrations():
 def make_migration():
 	model=raw_input ('through model name: ')
 	
-	make='''from models.'''+model.capitalize()+' import '+model.capitalize()+'''\ntable='''+model.capitalize()+'''().TableSchema()\n'''+model.capitalize()+'''.Migrations(\nid=table.Integer().PrimaryKey().Column\n)\n'''
+	make='''from models.'''+model.capitalize()+' import '+model.capitalize()+'''\ntable='''+model.capitalize()+'''().TableSchema()\n'''+model.capitalize()+'''.Migrations(\nid=table.Integer().PrimaryKey().AutoIncrement().Column\n)\n'''
 	a=open (ROOT +"/database/create_table_"+model+".py",'w')
 	a.write(make)
 	a.close()
