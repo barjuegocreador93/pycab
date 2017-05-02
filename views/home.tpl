@@ -7,7 +7,7 @@
 
    </ul>
 
-   <div class="col-sm-12">ss
+   <div class="col-sm-12">
 
       <h1 class="text-center">{{APP_NAME}}</h1>
 
