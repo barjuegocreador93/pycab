@@ -1,5 +1,5 @@
 # pycab
-## v.0.1.5.1 | dev sable
+## v.0.1.5.1 | dev stable
 Micro framework web App with python bottle
 
 # install
