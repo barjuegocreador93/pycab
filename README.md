@@ -90,8 +90,7 @@ Routes run a controllers functions using a http methods: GET, POST, PUT...
 
         Route.get(nameofroute)(controller)
         
-        Using Controller:
-        resources.routes.Controller(file,*fun)
+        
         
 3. ### Usage
  ```python
