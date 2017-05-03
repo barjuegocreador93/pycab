@@ -1,5 +1,5 @@
 # pycab
-## v.0.1.4 | dev
+## v.0.1.5 | dev
 Micro framework web App with python bottle
 
 # install
@@ -101,6 +101,17 @@ Routes run a controllers functions using a http methods: GET, POST, PUT...
            
   Route.get('/')(home)
   ```
+  
+  dynamic routing
+ ```python
+   
+  from resources.routes import Route
+    
+  Route.get('/<id :int>')()
+  
+  Route.get('/<ids :list>')()
+ ```
+  
 
 
 # views
