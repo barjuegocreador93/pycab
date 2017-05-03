@@ -1,9 +1,11 @@
-from resources.model import Model
-class User(Model):
-	Columns=Model.Columns
+from resources.model import *
 
-	Columns['name']=str()
-	Columns['email']=str()
-	Columns['password']=str()
-	pass
+class User(Model,Base):
 
+	__tablename__='User'
+	email=Column(String(255),unique=True)
+	name=Column(String(255))
+	password=Column(String(255))
+
+
+create_model()

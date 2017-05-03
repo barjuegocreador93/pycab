@@ -1,7 +1,7 @@
 import resources.packages as File
 
 if File.pipinstall('bottle'):
-	if File.pipinstall('fileDownloader.py'):
+	if File.pipinstall('fileDownloader.py') and File.pipinstall('sqlalchemy'):
 
 		print('basiclas installed')
 

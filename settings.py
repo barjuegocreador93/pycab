@@ -4,7 +4,10 @@ APP_NAME="PyCab"
 
 ROOT= os.path.dirname(os.path.abspath(__file__) )
 
-DB_NAME=ROOT+'/appdb.db' 
+DATABASE={
+    'engine':'sqlite3',
+    'path':''
+}
 
 HOST_NAME='localhost'
 HOST_PORT= 8000
