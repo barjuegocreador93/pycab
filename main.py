@@ -1,4 +1,4 @@
-from routes import APP
+from pycab_routes import Route as APP
 import settings
 
 def run_server():

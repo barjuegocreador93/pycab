@@ -1,5 +1,5 @@
 from resources.view import view
-from bottle import response,request
+from resources.routes import request,response
 
 
 def home():

@@ -138,6 +138,7 @@ class Model():
 
 	@classmethod
 	def Migrations(cls,**columns):
+		print columns
 		table=sqlite3.connect(DB_ROOT)
 		cls.tablename= cls.__name__
 		data=qrys('init-sql',**columns)
@@ -173,7 +174,7 @@ class Model():
 		data2=qrys('vars-sql',**qry)
 		print data2
 		print data
-		c.execute('SELECT '+data2['vars']+' FROM '+cls.tablename+' WHERE '+data['e-and'])
+		c.execute('SELECT '+'*'+' FROM '+cls.tablename+' WHERE '+data['e-and'])
 		resultA= c.fetchall()
 		resultB=[]
 		n=cls.Columns

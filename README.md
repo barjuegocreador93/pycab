@@ -1,4 +1,4 @@
-# pycab v.0.1.3 | no stable
+# pycab v.0.1.4 | no stable
 Micro framework web App with python bottle
 
 # install
@@ -13,7 +13,7 @@ Micro framework web App with python bottle
 
         $python install.py
 
-3. run pycab-requires.py
+3. run pycabRequires.py
 
         $python pycab.py
         $ run requires
@@ -68,11 +68,13 @@ Controller return a view.
         $ make controller
         
 3. ### Usage
+```python
 
-        from resources.view import view
-        
-        def main():
-            return vew('home',title='home')
+from resources.view import view
+     
+def main():
+    return view('home',title='home')
+```
 
 # routes.py
 
@@ -82,17 +84,24 @@ Routes run a controllers functions using a http methods: GET, POST, PUT...
 
 1. ### locate:
 
-        ROOT
+        ROOT/routes/web.py
     
 2. ### Create route:
 
-        APP.route(nameofroute,method=method)(controller)
+        Route.get(nameofroute)(controller)
+        
+        Using Controller:
+        resources.routes.Controller(file,*fun)
         
 3. ### Usage
+ ```python
+    
+  from resources.routes import Route
+  from controllers.controller import home
+           
+  Route.get('/')(home)
+  ```
 
-        from controllers import controller.main as home
-        
-        APP.route('/',method='GET')(home)
 
 # views
 
