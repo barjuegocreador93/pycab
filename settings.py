@@ -6,8 +6,10 @@ ROOT= os.path.dirname(os.path.abspath(__file__) )
 
 DATABASE={
     'engine':'sqlite3',
-    'path':''
+    'path':'/'+ROOT+'/apidb.db'
 }
+
+
 
 HOST_NAME='localhost'
 HOST_PORT= 8000

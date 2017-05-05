@@ -1,6 +1,6 @@
 from settings import ROOT
 from resources.roots import MODEL_ROOT,CONTROLLER_ROOT,VIEW_ROOT,DATABASE_ROOT
-version='0.1.3'
+version='0.1.5.1'
 from main import run_server
 import pycabRequires
 
@@ -11,9 +11,8 @@ def migrations():
 	
 def make_migration():
 	model=raw_input ('through model name: ')
-	
-	make='''from models.'''+model.capitalize()+' import '+model.capitalize()+'''\ntable='''+model.capitalize()+'''().TableSchema()\n'''+model.capitalize()+'''.Migrations(\nid=table.Integer().PrimaryKey().AutoIncrement().Column\n)\n'''
-	a=open (DATABASE_ROOT+"create_table_"+model+".py",'w')
+	make='''from models.'''+model.capitalize()+' import *\ndef create_table():\n\tcreate_model()\n\ndef drop_table():\n\tpass\n\ndef drop_table():\n\tUser.Drop()\n'
+	a=open (DATABASE_ROOT+"create_table_"+model.lower()+".py",'w')
 	a.write(make)
 	a.close()
 	
