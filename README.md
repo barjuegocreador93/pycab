@@ -59,16 +59,16 @@ our clients and interact with our site logic.
 
 Controller return a view.
 
-1. ### locate:
+1. ## locate:
 
         ROOT/controllers
     
-2. ### Create controller template:
+2. ## Create controller template:
 
         $python pycab.py    
         $ make controller
         
-3. ### Usage
+3. ## Usage
 ```python
 
 from resources.view import view
@@ -83,40 +83,51 @@ Is the way to impement a exists controller
 
 Routes run a controllers functions using a http methods: GET, POST, PUT...
 
-1. ### locate:
+1. ## locate:
 
-        ROOT/routes/web.py
-    
-2. ### Create route:
+    1. ### Web App retunable HTML  (WARH) or WEB using Views:
+
+
+                ROOT/routes/web/web.py
+
+    2. ### Web App retunable Json  (WARJ) or API using oauth2:
+
+                ROOT/routes/api/api.py
+
+
+
+2. ## Create route:
 
         Route.get(nameofroute)(controller)
         
         
         
-3. ### Usage
- ```python
-    
-  from resources.routes import Route
-  from controllers.controller import home
-           
-  Route.get('/')(home)
-  ```
+3. ## Usage
+    ```python
+
+      from resources.routes import Route
+      from controllers.controller import home
+
+      Route.get('/')(home)
+     ```
   
-  dynamic routing
- ```python
-   
-  from resources.routes import Route
-    
-  Route.get('/<id :int>')()
-  
-  Route.get('/<ids :list>')()
- ```
+      dynamic routing
+
+       ```python
+
+       from resources.routes import Route
+
+       Route.get('/<id :int>')()
+
+       Route.get('/<ids :list>')()
+       ```
   
 
 
 # views
 
 # models
+
 
 # migrationss
 
