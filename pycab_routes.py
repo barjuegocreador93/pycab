@@ -1,8 +1,7 @@
-from bottle import static_file
-import settings
-
 from bottle import re
-from routes.web import Route
+
+from routes.web.web import Route
+
 
 def list_filter(config):
     ''' Matches a comma separated list of numbers. '''
@@ -20,6 +19,4 @@ def list_filter(config):
 Route.router.add_filter('list', list_filter)
 
 
-import routes.files
-import routes.errors
 

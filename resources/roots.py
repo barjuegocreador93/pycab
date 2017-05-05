@@ -11,3 +11,6 @@ MODEL_ROOT=ROOT+'/models/'
 
 
 DATABASE_ROOT=ROOT+'/database/'
+
+
+PACKAGES_ROOR=ROOT+'/packages/'

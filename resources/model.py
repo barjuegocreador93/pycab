@@ -42,14 +42,16 @@ def Or(ops):
 	for i in ops:
 		qry += ' or ' + i
 	return qry
+
+
 class Model(object):
 	@staticmethod
 	def props():
 		pass
 
 
-	def __init__(self,**args):
-		self.__class__.__dict__.update(**args)
+	def __init__(self,*arg):
+		self.id=int(arg[0])
 
 	@classmethod
 	def Create(cls,**args):
@@ -72,26 +74,44 @@ class Model(object):
 		m = MetaData(bind=e, reflect=True)
 		t=m.tables[cls.__name__]
 
-		sera=select([t]).where(qry)
-		print qry
-		print qry.__dict__
+		#sera=select([t]).where(qry)
+
 		select_m = "SELECT * FROM '"+cls.__name__+"' WHERE "+(str(qry))+""
-		return e.execute(sera)
+		return [(cls(*i))for i in e.execute(select_m)]
 
 
 
 
 	def Update(self):
 
-		update=select([sql[0]]).set(**self.__class__.__dict__).where()
-		sql[1].execute(update)
+		#update=select([sql[0]]).set(**self.__class__.__dict__).where()
+		e = init_connection()
+		m = MetaData(e, reflect=True)
+		set=''
+		i=0
+		for k,v in self.__dict__.iteritems():
+			if k != 'id' and isinstance(k,str):
+				data=''
+				if not isinstance(v,str):
+					data+= " {} = {} ".format(k,str(v))
+				else:
+					data+= " {} = '{}' ".format(k, v)
+				if i>0 :
+					data=' , '+data
+				set+=data
+				i+=1
+
+		update = "UPDATE '" + self.__class__.__name__ + "' SET " + set + " WHERE id = "+str(self.id)
+		e.execute(update)
 		pass
+
+
 
 
 	@classmethod
 	def Drop(cls):
 		e=init_connection()
-		m=MetaData()
+		m=MetaData(bind=e,reflect=True)
 		table=m.tables[cls.__name__]
 		table.drop(e)
 		pass
@@ -101,6 +121,12 @@ class Model(object):
 		e=init_connection()
 		m=MetaData(e)
 		print args
-		t=Table(cls.__name__,m,*args)
+		t=Table(cls.__name__,m,Column('id', Integer, primary_key=True, autoincrement=True),*args)
 		t.create(e)
+
+
+	@classmethod
+	def Create_Migration(cls):
+		pass
+
 
