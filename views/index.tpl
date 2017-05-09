@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="/public/bootstrap/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
 </head>
 <body>
-	<script src="/public/jquery-3.2.1.min.js"></script>
 	<div class="container">
 		{{!base}}
 	</div>

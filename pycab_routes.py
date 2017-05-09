@@ -20,3 +20,7 @@ Route.router.add_filter('list', list_filter)
 
 
 
+import resources.oauth2.settings
+
+import routes.web.files
+import routes.web.errors
