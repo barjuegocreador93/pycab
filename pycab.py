@@ -11,7 +11,7 @@ def migrations():
 	
 def make_migration():
 	model=raw_input ('through model name: ')
-	make='''from models.'''+model.capitalize()+' import *\ndef create_table():\n\tcreate_model()\n\ndef drop_table():\n\tpass\n\ndef drop_table():\n\tUser.Drop()\n'
+	make='''from models.'''+model.capitalize()+''' import *\ndef create_table():\n\t'''+model.capitalize()+'''.create_table( Column('name', String(255) ) )\n\ndef drop_table():\n\t'''+model.capitalize()+'''.Drop()\n'''
 	a=open (DATABASE_ROOT+"create_table_"+model.lower()+".py",'w')
 	a.write(make)
 	a.close()
@@ -19,7 +19,7 @@ def make_migration():
 def make_models():
 	model=raw_input ('new model name: ')
 	
-	make='''from resources.model import Model\nclass '''+model.capitalize()+'''(Model):\n\tColumns=Model.Columns\n\tpass'''
+	make='''from resources.model import *\nclass '''+model.capitalize()+'''(Model):\n\tdef __init__(self,*args): \n\t\tsuper.__init__(args[0])\n\t\t'''
 	a=open (MODEL_ROOT+model.capitalize() +".py",'w')
 	a.write(make)
 	a.close()
