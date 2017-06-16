@@ -33,12 +33,12 @@ def MaxE(key,data):
 	return " {} >= {} ".format(key, typer(data))
 
 def And(*ops):
-	qry=ops[0]
+	qry=""
 	for i in ops:
 		qry+=' and '+i
 	return qry
 def Or(ops):
-	qry = ops[0]
+	qry = ""
 	for i in ops:
 		qry += ' or ' + i
 	return qry
@@ -48,6 +48,9 @@ class Model(object):
 	@staticmethod
 	def props():
 		pass
+
+
+
 
 
 	def __init__(self,*arg):
@@ -128,5 +131,43 @@ class Model(object):
 	@classmethod
 	def Create_Migration(cls):
 		pass
+
+
+	#relational methods
+
+	def addOne(self,item,fkey="defaultfk",ToOne=False):
+
+		if isinstance(item,Model) and isinstance(fkey,str):
+
+			if self.__dict__.has_key(fkey):
+				self.__dict__.__setitem__(fkey,item.id)
+				self.Update()
+
+			else:
+				fkey=item.__class__.__name__+"_id"
+				if self.__dict__.has_key(fkey):
+					self.__dict__.__setitem__(fkey, item.id)
+					self.Update()
+
+			if ToOne : item.addOne(self)
+
+	def GetOne(self,typemodel,fkey="defaultfk"):
+
+		if isinstance(typemodel,Model):
+			if self.__dict__.has_key(fkey):
+				return typemodel.Where(Equals("id",self.__dict__.__getitem__(fkey)))[0]
+			else:
+				fkey = typemodel.__class__.__name__ + "_id"
+				if self.__dict__.has_key(fkey):
+					return typemodel.Where(Equals("id", self.__dict__.__getitem__(fkey)))[0]
+		return 0
+
+
+
+
+		
+
+
+
 
 
